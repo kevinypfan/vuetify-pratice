@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="detail">
     <Toolbar :barItem="barItem"/>
     <SideDrawer />
   </div>
@@ -11,7 +11,7 @@ export default {
   components: { Toolbar, SideDrawer },
   data() {
     return {
-      barItem: { title: 'About' }
+      barItem: { title: 'Detail' }
     };
   }
 };
