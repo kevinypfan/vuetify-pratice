@@ -84,10 +84,6 @@
     </v-container>
 </template>
 <script>
-import SIGNUP from "@/graphql/Signup.gql";
-import LOGIN from "@/graphql/Login.gql";
-import { onLogin } from "@/plugins/vue-apollo";
-import apolloClient from "@/plugins/apolloClient";
 export default {
   data: () => ({
     mode: "Login",
@@ -128,7 +124,7 @@ export default {
               studentId: this.studentId,
               password: this.password
             })
-            .then(result => {
+            .then(() => {
               this.$router.push("/");
             })
             .catch(err => {
@@ -142,7 +138,7 @@ export default {
               studentId: this.studentId,
               password: this.password
             })
-            .then(result => {
+            .then(() => {
               this.$router.push("/");
             })
             .catch(err => {

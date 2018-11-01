@@ -15,7 +15,7 @@
             </v-list-tile-avatar>
 
             <v-list-tile-content>
-              <v-list-tile-title>John Leider</v-list-tile-title>
+              <v-list-tile-title>{{ username }}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -25,7 +25,6 @@
         <v-list-tile
           v-for="item in items"
           :key="item.title"
-          @click="click"
           :to="item.link"
         >
           <v-list-tile-action>
@@ -55,6 +54,7 @@
 
 <script>
 export default {
+  props: ["username"],
   data() {
     return {
       drawer: null,
@@ -66,11 +66,6 @@ export default {
     };
   },
   methods: {
-    click() {
-      setTimeout(() => {
-        this.$store.commit("setDrawer");
-      }, 200);
-    },
     userLogout() {
       this.$store
         .dispatch("userLogout")

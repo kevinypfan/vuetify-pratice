@@ -2,7 +2,8 @@ export default {
     state: {
         dark: false,
         drawer: false,
-        loading: false
+        loading: false,
+        dialog: false
     },
     mutations: {
         setDark(state) {
@@ -13,6 +14,9 @@ export default {
         },
         setLoading(state, payload) {
             state.loading = payload
+        },
+        setDialog(state, payload) {
+            state.dialog = payload
         }
     }
 }

@@ -1,0 +1,13 @@
+fragment course on Course {
+    name
+    class
+    subject
+    campus
+    room
+    subjectCode
+    courseCode
+    id
+    credit
+    createAt
+    selectNumber
+}

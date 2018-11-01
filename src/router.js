@@ -20,8 +20,7 @@ const router = new Router({
     {
       path: '/auth',
       name: 'auth',
-      component: Auth,
-      meta: { alreadyAuth: true }
+      component: Auth
     },
     {
       path: '/about',
@@ -37,23 +36,21 @@ const router = new Router({
     }
   ]
 })
-
+// to.matched.some(record => record.meta.requiresAuth
 router.beforeEach((to, from, next) => {
-  if (store.state.user.user & to.path !== '/auth') next()
-  if (to.matched.some(record => record.meta.requiresAuth)) {
+  if (!store.getters.authenticate) {
     store.dispatch('checkToken').then(() => {
-      next()
+      if (to.path == '/auth') return next('/')
+      return next()
     }).catch(() => {
-      next('/auth')
-    })
-  } else if (to.matched.some(record => record.meta.alreadyAuth)) {
-    store.dispatch('checkToken').then(() => {
-      next('/')
-    }).catch(() => {
-      next()
+      if (to.matched.some(record => record.meta.requiresAuth)) {
+        return next('/auth')
+      }
+      return next()
     })
   } else {
-    next()
+    if (to.path == '/auth') return next('/')
+    return next()
   }
 })
 

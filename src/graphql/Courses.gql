@@ -1,0 +1,20 @@
+#import "./CourseFragment.gql"
+#import "./TeacherFragment.gql"
+#import "./StudentFragment.gql"
+#import "./UserFragment.gql"
+
+
+{
+  courses{
+    ...course
+    teacher {
+      ...teacher
+    }
+    students {
+      ...student
+    }
+    createBy {
+      ...user
+    }
+  }
+}

@@ -48,6 +48,7 @@ export default {
             const { data } = await apolloClient.query({
                 query: CheckToken
             })
+            console.log(data)
             if (data.checkToken) {
                 commit('setUser', data.checkToken)
                 return Promise.resolve('user token checked!')
@@ -55,6 +56,15 @@ export default {
                 window.localStorage.removeItem('x-access-token')
                 return Promise.reject('authenticate failed!')
             }
+        }
+    },
+    getters: {
+        username(state) {
+            if (!state.user) return 'Guest'
+            return state.user.username
+        },
+        authenticate(state) {
+            return state.user !== null && state.user !== undefined
         }
     }
 }

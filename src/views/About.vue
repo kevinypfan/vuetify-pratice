@@ -1,7 +1,6 @@
 <template>
   <div class="about">
     <Toolbar :barItem="barItem"/>
-    <SideDrawer />
   </div>
 </template>
 <script>

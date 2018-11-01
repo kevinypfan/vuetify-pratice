@@ -1,7 +1,6 @@
 <template>
     <div class="auth">
         <Toolbar :barItem="barItem"/>
-        <SideDrawer />
         <Auth />
     </div>
 </template>

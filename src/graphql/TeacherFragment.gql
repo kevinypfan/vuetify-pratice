@@ -1,0 +1,4 @@
+fragment teacher on Teacher {
+    firstname
+    lastname
+}
