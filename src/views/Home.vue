@@ -2,29 +2,18 @@
 <div class="home">
   <Toolbar :barItem="barItem"/>
   <SideDrawer />
-  <CardList />
-  <CardList />
-  <CardList />
-  <CardList />
-  <CardList />
-  <CardList />
-  <CardList />
-  <CardList />
-  <CardList />
-  <CardList />
+  <CourseList />
 </div>
  
 </template>
 
 <script>
-import Toolbar from '@/components/Toolbar/Toolbar.vue';
-import SideDrawer from '@/components/SideDrawer/SideDrawer.vue';
-import CardList from '@/components/Home/CardList.vue';
+import CourseList from "@/components/Course/CourseList.vue";
 export default {
-  components: { Toolbar, SideDrawer, CardList },
+  components: { CourseList },
   data() {
     return {
-      barItem: { title: 'Home' }
+      barItem: { title: "Home" }
     };
   }
 };

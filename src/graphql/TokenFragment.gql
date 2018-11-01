@@ -1,0 +1,6 @@
+fragment token on Token {
+    id
+    device
+    token
+    requestIp
+}

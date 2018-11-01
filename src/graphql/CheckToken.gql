@@ -1,0 +1,11 @@
+#import "./TokenFragment.gql"
+#import "./UserFragment.gql"
+
+{
+  checkToken {
+    ...user
+    tokens {
+      ...token
+    }
+  }
+}

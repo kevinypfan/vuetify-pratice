@@ -1,0 +1,11 @@
+#import "./TokenFragment.gql"
+#import "./UserFragment.gql"
+
+mutation signup($username: String, $studentId: String, $password: String){
+  signup(username: $username, studentId: $studentId, password: $password) {
+    ...user
+    tokens {
+      ...token
+    }
+  }
+}

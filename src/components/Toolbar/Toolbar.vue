@@ -31,7 +31,7 @@
             <v-list-tile-action>
               <v-btn icon ripple>
                 <v-switch
-                  :value="this.$store.state.dark"
+                  :value="this.$store.state.UI.dark"
                   @change="darkControl"
                 ></v-switch>              
               </v-btn>
@@ -44,13 +44,13 @@
 
 <script>
 export default {
-  props: ['barItem', 'back'],
+  props: ["barItem", "back"],
   methods: {
     darkControl() {
-      this.$store.commit('setDark');
+      this.$store.commit("setDark");
     },
     drawerControl() {
-      this.$store.commit('setDrawer');
+      this.$store.commit("setDrawer");
     }
   }
 };
