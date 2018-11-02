@@ -3,8 +3,9 @@
 #import "./StudentFragment.gql"
 #import "./UserFragment.gql"
 
-{
-  courses {
+
+subscription {
+  courseAddedData {
     ...course
     teacher {
       ...teacher

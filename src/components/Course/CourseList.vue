@@ -35,22 +35,6 @@
 <script>
 export default {
   props: ["courses"],
-  data() {
-    return {
-      items2: [
-        {
-          iconClass: "blue white--text",
-          title: "Vacation itinerary",
-          subtitle: "Jan 20, 2014"
-        },
-        {
-          iconClass: "amber white--text",
-          title: "Kitchen remodel",
-          subtitle: "Jan 10, 2014"
-        }
-      ]
-    };
-  },
   methods: {
     click() {
       console.log("here");

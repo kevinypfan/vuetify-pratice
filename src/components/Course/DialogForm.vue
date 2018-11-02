@@ -34,12 +34,14 @@
                 <v-text-field v-model="campus" label="上課校區" :rules="[v => !!v || '上課校區 is required']" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6>
-                <v-text-field v-model="credit" label="學分" hint="輸入數字！" :rules="[v => !!v || '學分 is required', v => typeof(v) === 'number' || '學分必須是數字']" required></v-text-field>
+                <v-text-field v-model="credit" label="學分" hint="輸入數字！" :rules="[v => !!v || '學分 is required', v => Number.isInteger(parseInt(v)) || '學分必須是數字']" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6>
                 <v-select
                   v-model="subject"
-                  :items="['必修', '選修']"
+                  :items="[{'zh-tw': '必修', value: 'COMPULSORY'}, {'zh-tw':'選修', value: 'ELECTIVE'}]"
+                  item-text="zh-tw"
+                  item-value="value"
                   label="必/選修"
                   :rules="[v => !!v || 'subject is required']"
                   required
@@ -78,20 +80,19 @@
 </template>
 <script>
 export default {
-  props: ["data"],
   data: () => ({
     file: null,
     valid: true,
-    name: "",
-    firstname: "",
-    lastname: "",
-    classType: "",
-    campus: "",
-    subject: "",
-    room: "",
-    subjectCode: "",
-    courseCode: "",
-    credit: null,
+    name: "資料結構",
+    firstname: "周",
+    lastname: "念湘",
+    classType: "日資工二甲",
+    campus: "第二校區",
+    subject: "必修",
+    room: "lab305",
+    subjectCode: "DEIE0014",
+    courseCode: "071IEA0026",
+    credit: 3,
     autofocus: false
   }),
   computed: {
@@ -128,8 +129,9 @@ export default {
         name: this.name,
         teacher: {
           firstname: this.firstname,
-          class: this.classType
+          lastname: this.lastname
         },
+        class: this.classType,
         campus: this.campus,
         subject: this.subject,
         room: this.room,
@@ -139,20 +141,6 @@ export default {
         studentsExcel: this.file
       };
       this.$emit("onSubmitForm", data);
-    },
-    created() {
-      if (data) {
-        this.name = data.name;
-        this.firstname = data.teacher.firstname;
-        this.lastname = data.teacher.lastname;
-        this.campus = data.campus;
-        this.subject = data.subject;
-        this.room = data.room;
-        this.subjectCode = data.subjectCode;
-        this.courseCode = data.courseCode;
-        this.credit = data.credit;
-        this.studentsExcel = data.studentsExcel;
-      }
     }
   }
 };
