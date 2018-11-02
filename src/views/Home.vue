@@ -3,7 +3,8 @@
   <Toolbar :barItem="barItem"/>
   <CourseList :courses="courses"/>
   <FloatButton />
-  <DialogForm />
+  <DialogForm @onSubmitForm="submitFormHandler" :data="tempData"/>
+  <DialogLoading />
 </div>
  
 </template>
@@ -18,12 +19,31 @@ export default {
   data() {
     return {
       barItem: { title: "Home" },
-      courses: null
+      courses: null,
+      formDataTemp: null
     };
   },
   apollo: {
     courses: {
       query: COURSES
+    }
+  },
+  methods: {
+    submitFormHandler(payload) {
+      this.$store.commit("setLoading", true);
+      this.formDataTemp = payload;
+      setTimeout(() => {
+        this.$store.commit("setLoading", false);
+        this.$store.commit("setDialog", false);
+      }, 3000);
+    }
+  },
+  computed: {
+    tempData() {
+      if (this.formDataTemp) {
+        return this.formDataTemp;
+      }
+      return false;
     }
   }
 };

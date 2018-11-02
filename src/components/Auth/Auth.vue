@@ -27,6 +27,15 @@
                         justify-center
                         py-4
                     >
+                    <v-flex xs10 offset-1>
+                        <v-alert
+                            v-if="error"
+                            :value="error"
+                            type="error"
+                        >
+                            {{ error }}
+                        </v-alert>
+                    </v-flex>
                         <v-flex xs10>
                             <v-btn block @click="switchMode" :color="$store.state.UI.dark ? '': 'info'">移至{{mode !== 'Login' ? '登入': '註冊'}}頁面</v-btn>
                         </v-flex>
@@ -39,16 +48,17 @@
                         <v-flex xs10>
                             <v-form ref="form" v-model="valid" lazy-validation>
                                 <v-text-field
+                                    v-model="studentId"
+                                    :rules="[v => !!v || 'Student ID is required']"
+                                    label="Student ID"
+                                    autofocus
+                                    required
+                                ></v-text-field>
+                                <v-text-field
                                     v-if="mode !== 'Login'"
                                     v-model="username"
                                     :rules="[v => !!v || 'Username is required']"
                                     label="Username"
-                                    required
-                                ></v-text-field>
-                                <v-text-field
-                                    v-model="studentId"
-                                    :rules="[v => !!v || 'Student ID is required']"
-                                    label="Student ID"
                                     required
                                 ></v-text-field>
                                 <v-text-field
@@ -68,12 +78,13 @@
                                 ></v-text-field>
                                 <v-flex pb-4 pt-5>
                                     <v-btn
+                                        :color="$store.state.UI.dark ? '': 'primary'"
                                         :disabled="!valid"
                                         @click="submitForm"
+                                        :loading="$store.state.UI.loading"
                                     >
                                         submit
                                     </v-btn>
-                                    <v-btn @click="clearForm">clear</v-btn>
                                 </v-flex>
                             </v-form>
                         </v-flex>
@@ -91,7 +102,8 @@ export default {
     studentId: "V0224031",
     password: "abc123",
     confirm: "abc123",
-    valid: true
+    valid: true,
+    error: null
   }),
   created() {},
   methods: {
@@ -125,10 +137,14 @@ export default {
               password: this.password
             })
             .then(() => {
-              this.$router.push("/");
+              this.$store.commit("setLoading", true);
+              setTimeout(() => {
+                this.$store.commit("setLoading", false);
+                this.$router.push("/");
+              }, 3000);
             })
-            .catch(err => {
-              console.log(err);
+            .catch(error => {
+              this.error = error.graphQLErrors[0].message;
             });
           break;
         case "Signup":
@@ -148,12 +164,6 @@ export default {
         default:
           break;
       }
-    },
-    clearForm() {
-      (this.studentId = ""),
-        (this.password = ""),
-        (this.confirm = ""),
-        (this.username = "");
     },
     switchMode() {
       this.mode = this.mode === "Login" ? "Signup" : "Login";

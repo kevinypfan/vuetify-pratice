@@ -1,0 +1,19 @@
+#import "./CourseFragment.gql"
+#import "./TeacherFragment.gql"
+#import "./StudentFragment.gql"
+#import "./UserFragment.gql"
+
+mutation newCourse($data: newCourseInput) {
+  newCourse(data: $data) {
+    ...course
+    teacher {
+      ...teacher
+    }
+    students {
+      ...student
+    }
+    createBy {
+      ...user
+    }
+  }
+}
