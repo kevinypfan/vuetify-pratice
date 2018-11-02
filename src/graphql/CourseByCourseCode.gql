@@ -1,0 +1,19 @@
+#import "./CourseFragment.gql"
+#import "./TeacherFragment.gql"
+#import "./StudentFragment.gql"
+#import "./UserFragment.gql"
+
+query couseByCourseCode($courseCode: String!){
+  couseByCourseCode(courseCode: $courseCode) {
+    ...course
+    teacher {
+      ...teacher
+    }
+    students {
+      ...student
+    }
+    createBy {
+      ...user
+    }
+  }
+}

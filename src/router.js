@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Auth from './views/Auth.vue'
 import About from './views/About.vue'
 import Detail from './views/Detail.vue'
+import CourseInfo from './views/CourseInfo.vue'
 import store from '@/store/store'
 
 Vue.use(Router)
@@ -33,6 +34,14 @@ const router = new Router({
       name: 'detail',
       component: Detail,
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/info/:id',
+      name: 'courseInfo',
+      component: CourseInfo
+    },
+    {
+      path: '/*', redirect: '/'
     }
   ]
 })

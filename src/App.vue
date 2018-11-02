@@ -1,6 +1,7 @@
 <template>
   <v-app :dark="$store.state.UI.dark">
     <v-content>
+      <Toolbar :barConfig="barConfig"/>
       <SideDrawer :username="$store.getters.username"/>
       <transition name="fade">
         <router-view></router-view>
@@ -17,7 +18,7 @@ export default {
   name: "App",
   components: { SideDrawer },
   data: () => ({
-    toolbarConfig: {}
+    barConfig: {}
   }),
   created() {
     if (!Array.prototype.last) {
@@ -45,8 +46,8 @@ export default {
       } else {
         config.back = null;
       }
-      this.toolbarConfig = {
-        ...this.toolbarConfig,
+      this.barConfig = {
+        ...this.barConfig,
         ...config
       };
     }

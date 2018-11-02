@@ -1,6 +1,5 @@
 <template>
     <div class="auth">
-        <Toolbar :barItem="barItem"/>
         <Auth />
     </div>
 </template>

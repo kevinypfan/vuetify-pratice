@@ -141,7 +141,7 @@ export default {
               setTimeout(() => {
                 this.$store.commit("setLoading", false);
                 this.$router.push("/");
-              }, 3000);
+              }, 1500);
             })
             .catch(error => {
               this.error = error.graphQLErrors[0].message;

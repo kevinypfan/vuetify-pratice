@@ -1,8 +1,7 @@
 <template>
 <div class="home">
-  <Toolbar :barItem="barItem"/>
   <CourseList :courses="courses"/>
-  <FloatButton />
+  <FloatButton v-if="isAuthAndAdmin"/>
   <DialogForm @onSubmitForm="submitFormHandler"/>
   <DialogLoading />
 </div>
@@ -62,11 +61,20 @@ export default {
         await setTimeout(() => {
           this.$store.commit("setLoading", false);
           this.$store.commit("setDialog", false);
-        }, 3000);
+        }, 1500);
       } catch (error) {
         this.$store.commit("setLoading", false);
         console.log(error);
       }
+    }
+  },
+  computed: {
+    isAuthAndAdmin() {
+      return (
+        this.$store.state.user.user !== undefined &&
+        this.$store.state.user.user !== null &&
+        this.$store.state.user.user.scope === "ADMIN"
+      );
     }
   }
 };

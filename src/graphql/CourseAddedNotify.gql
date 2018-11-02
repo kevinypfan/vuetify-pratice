@@ -1,0 +1,7 @@
+subscription {
+  courseAddedNotify {
+    icon
+    message
+    timestamp
+  }
+}
