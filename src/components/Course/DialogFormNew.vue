@@ -1,6 +1,6 @@
 <template>
   <v-layout row justify-center>
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="value" persistent max-width="600px">
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-card>
         <v-card-title>
@@ -80,6 +80,7 @@
 </template>
 <script>
 export default {
+  props: ["value"],
   data: () => ({
     file: null,
     valid: true,
@@ -96,14 +97,6 @@ export default {
     autofocus: false
   }),
   computed: {
-    dialog: {
-      get() {
-        return this.$store.state.UI.dialog;
-      },
-      set(value) {
-        this.$store.commit("setDialog", value);
-      }
-    },
     filename() {
       if (!this.file) {
         return "";
@@ -113,10 +106,10 @@ export default {
   },
   methods: {
     closeDialog() {
-      this.$store.commit("setDialog", false);
+      this.$emit("input", false);
     },
     openDialog() {
-      this.$store.commit("setDialog", true);
+      this.$emit("input", true);
     },
     openFileDialog() {
       document.getElementById("file-upload").click();

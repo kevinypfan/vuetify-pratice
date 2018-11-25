@@ -1,0 +1,8 @@
+fragment homework on Homework {
+    id
+    title
+    description
+    createAt
+    start
+    end
+}

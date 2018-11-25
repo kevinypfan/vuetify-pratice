@@ -65,6 +65,13 @@ export default {
         },
         authenticate(state) {
             return state.user !== null && state.user !== undefined
+        },
+        isAuthAndAdmin(state) {
+            return (
+                state.user !== undefined &&
+                state.user !== null &&
+                state.user.scope === "ADMIN"
+            );
         }
     }
 }

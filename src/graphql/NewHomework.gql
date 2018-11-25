@@ -1,0 +1,19 @@
+#import "./CourseFragment.gql"
+#import "./UserFragment.gql"
+
+mutation newHomework($data: newHomeworkInput) {
+  newHomework(data: $data) {
+    id
+    title
+    description
+    course {
+      ...course
+    }
+    createAt
+    start
+    end
+    createBy {
+      ...user
+    }
+  }
+}

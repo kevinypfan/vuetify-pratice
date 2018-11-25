@@ -1,5 +1,5 @@
 subscription {
-  courseAddedNotify {
+  addedNotify {
     icon
     message
     timestamp

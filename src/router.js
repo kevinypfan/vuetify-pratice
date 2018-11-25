@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Auth from './views/Auth.vue'
 import About from './views/About.vue'
 import Detail from './views/Detail.vue'
+import Work from './views/Work.vue'
 import CourseInfo from './views/CourseInfo.vue'
 import store from '@/store/store'
 
@@ -39,6 +40,12 @@ const router = new Router({
       path: '/info/:id',
       name: 'courseInfo',
       component: CourseInfo
+    },
+    {
+      path: '/system/:course',
+      name: 'workLsit',
+      component: Work,
+      meta: { requiresAuth: true }
     },
     {
       path: '/*', redirect: '/'

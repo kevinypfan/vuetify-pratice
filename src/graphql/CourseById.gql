@@ -3,8 +3,8 @@
 #import "./StudentFragment.gql"
 #import "./UserFragment.gql"
 
-query couseByCourseCode($courseCode: String!){
-  couseByCourseCode(courseCode: $courseCode) {
+query courseById($course: ID!){
+  courseById(course: $course) {
     ...course
     teacher {
       ...teacher

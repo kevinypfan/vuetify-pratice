@@ -7,7 +7,7 @@
             v-for="course in courses"
             :key="course.id"
             avatar
-            @click="click"
+            :to="`/system/${course.id}`"
           >
             <v-list-tile-avatar>
               <v-icon class="white--text" :class="course.subject === 'COMPULSORY' ?'red': 'amber'">call_to_action</v-icon>
@@ -19,7 +19,7 @@
             </v-list-tile-content>
 
             <v-list-tile-action>
-              <v-btn icon ripple :to="`/info/${course.courseCode}`">
+              <v-btn icon ripple :to="`/info/${course.id}`">
                 <v-icon color="grey lighten-1">info</v-icon>
               </v-btn>
             </v-list-tile-action>
@@ -31,11 +31,6 @@
 </template>
 <script>
 export default {
-  props: ["courses"],
-  methods: {
-    click() {
-      console.log("herh");
-    }
-  }
+  props: ["courses"]
 };
 </script>

@@ -12,7 +12,7 @@
         dark
         small
         color="indigo"
-        @click="newCourseDialog"
+        @click="$emit('onNewBtn')"
       >
         <v-icon>add</v-icon>
       </v-btn>
@@ -31,6 +31,7 @@
         dark
         small
         color="green"
+        @click="$emit('onEditBtn')"
       >
         <v-icon>edit</v-icon>
       </v-btn>
@@ -39,6 +40,7 @@
         dark
         small
         color="red"
+        @click="$emit('onDelBtn')"
       >
         <v-icon>delete</v-icon>
       </v-btn>
@@ -51,13 +53,7 @@
 export default {
   data: () => ({
     fab: false
-  }),
-  computed: {},
-  methods: {
-    newCourseDialog() {
-      this.$store.commit("setDialog", true);
-    }
-  }
+  })
 };
 </script>
 <style lang="scss" scoped>

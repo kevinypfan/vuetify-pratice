@@ -1,13 +1,12 @@
 <template>
   <v-toolbar>
-    
     <v-toolbar-side-icon
       v-if="!barConfig.back"
       icon
       @click.stop="drawerControl"
     ></v-toolbar-side-icon>
 
-    <v-btn icon ripple v-if="barConfig.back" color="currentColor" :to="barConfig.back">
+    <v-btn depressed icon v-if="barConfig.back" exact :to="barConfig.back">
       <v-icon>arrow_back_ios</v-icon>
     </v-btn>
     <v-toolbar-title>{{ barConfig.title }}</v-toolbar-title>
@@ -38,7 +37,7 @@
             <v-list-tile
               :key="index"
               avatar
-              @click="console.log('notify')"
+              @click="notifyClick"
             >
               <v-list-tile-avatar>
                 <v-icon class="amber white--text">{{ item.icon }}</v-icon>
@@ -82,7 +81,7 @@
 
 <script>
 import moment from "moment";
-import CourseAddedNotify from "@/graphql/CourseAddedNotify.gql";
+import AddedNotify from "@/graphql/AddedNotify.gql";
 export default {
   props: ["barConfig"],
   data() {
@@ -92,11 +91,13 @@ export default {
   },
   apollo: {
     $subscribe: {
-      courseAddedNotify: {
-        query: CourseAddedNotify,
+      addedNotify: {
+        query: AddedNotify,
         result({ data }) {
-          const temp = [...this.items].concat(data.courseAddedNotify);
+          console.log(data);
+          const temp = [...this.items].concat(data.addedNotify);
           this.items = temp;
+          return temp;
         }
       }
     }
@@ -110,6 +111,9 @@ export default {
     },
     timeFormat(stamp) {
       return moment(new Date(stamp)).format("HH:mm:ss");
+    },
+    notifyClick() {
+      console.log(this.$apollo);
     }
   },
   computed: {

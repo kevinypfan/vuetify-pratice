@@ -1,0 +1,16 @@
+#import "./CourseFragment.gql"
+#import "./UserFragment.gql"
+#import "./HomeworkFragment.gql"
+
+
+{
+  homeworks {
+    ...homework
+    createBy {
+        ...user
+    }
+    course {
+        ...course
+    }
+  }
+}

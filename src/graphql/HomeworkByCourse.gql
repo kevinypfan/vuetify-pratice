@@ -1,0 +1,15 @@
+#import "./CourseFragment.gql"
+#import "./UserFragment.gql"
+#import "./HomeworkFragment.gql"
+
+query homeworkByCourse($course: ID!) {
+ 	homeworkByCourse(course: $course) {
+    ...homework
+    createBy {
+        ...user
+    }
+    course {
+        ...course
+    }
+  } 
+}

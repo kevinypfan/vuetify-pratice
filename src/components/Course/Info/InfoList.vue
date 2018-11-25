@@ -5,7 +5,6 @@
         xs12
         sm6
         md4
-        lg3
       >
         <v-card v-if="courseInfo">
           <v-card-title><h4>科目名稱: {{ courseInfo.name }}</h4></v-card-title>
@@ -50,7 +49,7 @@
   </v-container>
 </template>
 <script>
-import CourseByCourseCode from "@/graphql/CourseByCourseCode.gql";
+import CourseById from "@/graphql/CourseById.gql";
 export default {
   data: () => ({
     courseInfo: null
@@ -58,13 +57,13 @@ export default {
   created() {
     this.$apollo
       .query({
-        query: CourseByCourseCode,
+        query: CourseById,
         variables: {
-          courseCode: this.$route.params.id
+          course: this.$route.params.id
         }
       })
       .then(({ data }) => {
-        this.courseInfo = data.couseByCourseCode;
+        this.courseInfo = data.courseById;
       })
       .catch(err => {
         console.log(err);

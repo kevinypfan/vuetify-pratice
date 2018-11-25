@@ -1,8 +1,8 @@
 <template>
 <div class="home">
   <CourseList :courses="courses"/>
-  <FloatButton v-if="isAuthAndAdmin"/>
-  <DialogForm @onSubmitForm="submitFormHandler"/>
+  <FloatButton v-if="$store.getters.isAuthAndAdmin" @onNewBtn="newCourseHandler"/>
+  <DialogFormNew v-model="dialog" @onSubmitForm="submitFormHandler"/>
   <DialogLoading />
 </div>
  
@@ -10,17 +10,18 @@
 
 <script>
 import CourseList from "@/components/Course/CourseList.vue";
-import FloatButton from "@/components/Course/FloatButton.vue";
-import DialogForm from "@/components/Course/DialogForm.vue";
+import DialogFormNew from "@/components/Course/DialogFormNew.vue";
 import COURSES from "@/graphql/Courses.gql";
 import NewCourse from "@/graphql/NewCourse.gql";
 import CourseAddedData from "@/graphql/CourseAddedData.gql";
 export default {
-  components: { CourseList, FloatButton, DialogForm },
+  components: { CourseList, DialogFormNew },
   data() {
     return {
       barItem: { title: "Home" },
-      courses: null
+      courses: null,
+      formNew: false,
+      dialog: false
     };
   },
   apollo: {
@@ -60,21 +61,16 @@ export default {
         });
         await setTimeout(() => {
           this.$store.commit("setLoading", false);
-          this.$store.commit("setDialog", false);
+          this.dialog = false;
         }, 1500);
       } catch (error) {
         this.$store.commit("setLoading", false);
         console.log(error);
       }
-    }
-  },
-  computed: {
-    isAuthAndAdmin() {
-      return (
-        this.$store.state.user.user !== undefined &&
-        this.$store.state.user.user !== null &&
-        this.$store.state.user.user.scope === "ADMIN"
-      );
+    },
+    newCourseHandler(value) {
+      this.formNew = value;
+      this.dialog = true;
     }
   }
 };
